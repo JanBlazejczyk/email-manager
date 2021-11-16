@@ -1,5 +1,7 @@
-const SUBSCRIBERS_URL = 'https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers?api_key=key1DrhlGhrBgLjhU';
-const CAMPAIGNS_URL = 'https://api.airtable.com/v0/appEI6OkMBbhnzeas/Campaigns?api_key=key1DrhlGhrBgLjhU';
+const SUBSCRIBERS_URL = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
+const CAMPAIGNS_URL = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Campaigns?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
+
+
 
 const add = (url, data) => {
     const config = {
