@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
+import { addCampaign } from "../../api";
 
 function AddCampaignForm() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data); // here we send the data to the API
+    const onSubmit = data => addCampaign(data); // here we send the data to the API
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
