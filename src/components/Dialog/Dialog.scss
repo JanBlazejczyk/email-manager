@@ -1,0 +1,11 @@
+.dialog {
+    border: solid;
+    border-radius: 10px;
+    width: 350px;
+    position: absolute; /* or fixed */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    box-shadow: 5px 5px 5px 5px #888888;
+}
