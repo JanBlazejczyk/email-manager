@@ -1,14 +1,10 @@
 import './App.css';
-import { AddSubscriberForm } from "./components/AddSubscriberForm";
-import { AddCampaignForm } from "./components/AddCampaignForm";
-
+import { Main } from "./pages/Main";
 
 function App() {
   return (
     <div className="App">
-      <h1>Campaign app</h1>
-      <AddSubscriberForm />
-      <AddCampaignForm />
+      <Main />
     </div>
   );
 }
