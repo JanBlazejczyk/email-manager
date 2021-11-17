@@ -2,6 +2,7 @@ import { AddCampaignForm } from "../components/AddCampaignForm";
 import { AddSubscriberForm } from "../components/AddSubscriberForm";
 import { Dialog } from "../components/Dialog";
 import { MainButton } from "../components/MainButton";
+import { AddButton } from "../components/AddButton";
 import { useState } from "react";
 
 
@@ -19,6 +20,8 @@ export function Main() {
       <h2>Email Sender</h2>
       <MainButton label="Subscribers" />
       <MainButton label="Campaigns" />
+      <AddButton />
+      <AddButton />
       <Dialog>
         <AddCampaignForm />
       </Dialog>
