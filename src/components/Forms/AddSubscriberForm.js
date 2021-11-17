@@ -3,10 +3,13 @@ import { addSubscriber } from "../../api";
 
 import "./Forms.scss"
 
-function AddSubscriberForm() {
+function AddSubscriberForm({ closeDialog }) {
     // eslint-disable-next-line no-unused-vars
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => addSubscriber(data); // here we send the data to the API
+    const onSubmit = (data) => {
+        addSubscriber(data);
+        closeDialog()
+    };
 
     return (
         <form className="form" onSubmit={handleSubmit(onSubmit)}>

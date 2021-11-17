@@ -29,10 +29,10 @@ export function Main() {
       <AddButton openDialog={handleSubscriberFormOpen} />
       <AddButton openDialog={handleCampaignFormOpen} />
       <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
-        <AddCampaignForm />
+        <AddCampaignForm closeDialog={handleDialogClose} />
       </Dialog>
       <Dialog active={addSubscriberFormOpen} closeDialog={handleDialogClose}>
-        <AddSubscriberForm />
+        <AddSubscriberForm closeDialog={handleDialogClose} />
       </Dialog>
     </div>
   );

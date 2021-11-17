@@ -16,10 +16,10 @@ const add = (url, data) => {
 }
 
 export const addSubscriber = (data) => {
-    return add(SUBSCRIBERS_URL, data)
+    return add(SUBSCRIBERS_URL, data);
 }
 
 export const addCampaign = (data) => {
-    return add(CAMPAIGNS_URL, data)
+    return add(CAMPAIGNS_URL, data);
 }
 

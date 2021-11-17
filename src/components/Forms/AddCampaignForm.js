@@ -3,9 +3,12 @@ import "./Forms.scss";
 
 import { useForm } from "react-hook-form";
 
-function AddCampaignForm() {
+function AddCampaignForm({ closeDialog }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => addCampaign(data); // here we send the data to the API
+  const onSubmit = (data) => {
+    addCampaign(data);
+    closeDialog()
+  };
 
   return (
 
