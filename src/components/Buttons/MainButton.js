@@ -1,5 +1,5 @@
 function MainButton({ label }) {
-    return <button>{label}</button>;
+    return <button className="button button--main">{label}</button>;
 }
 
 export default MainButton;

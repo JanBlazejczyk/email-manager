@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-import "./AddButton.scss";
+import "./Buttons.scss";
 
 
-function AddButton() {
+function AddButton({ openDialog }) {
     return (
-        <FontAwesomeIcon className="add-button" icon={faPlusCircle} size="lg" />
+        <FontAwesomeIcon onClick={openDialog} className="button button--add" icon={faPlusCircle} size="lg" />
     );
 }
 
