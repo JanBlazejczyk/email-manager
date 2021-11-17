@@ -1,5 +1,5 @@
 import { addCampaign } from "../../api";
-import "./AddCampaignForm.scss";
+import "./Forms.scss";
 
 import { useForm } from "react-hook-form";
 

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { addSubscriber } from "../../api";
 
-import "../AddCampaignForm/AddCampaignForm.scss"
+import "./Forms.scss"
 
 function AddSubscriberForm() {
     // eslint-disable-next-line no-unused-vars

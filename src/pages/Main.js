@@ -1,8 +1,6 @@
-import { AddCampaignForm } from "../components/AddCampaignForm";
-import { AddSubscriberForm } from "../components/AddSubscriberForm";
+import { AddCampaignForm, AddSubscriberForm } from "../components/Forms";
 import { Dialog } from "../components/Dialog";
-import { MainButton } from "../components/MainButton";
-import { AddButton } from "../components/AddButton";
+import { AddButton, MainButton } from "../components/Buttons";
 import { useState } from "react";
 
 
