@@ -7,7 +7,7 @@ function AddCampaignForm({ closeDialog }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = (data) => {
     addCampaign(data);
-    closeDialog()
+    closeDialog();
   };
 
   return (

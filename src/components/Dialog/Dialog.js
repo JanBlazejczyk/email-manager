@@ -3,9 +3,6 @@ import { CloseModalButton } from "../Buttons";
 import "./Dialog.scss";
 
 function Dialog({ children, active, closeDialog }) {
-
-  <CloseModalButton closeDialog={closeDialog} />
-
   if (active) {
     return (
       <div className="dialog">

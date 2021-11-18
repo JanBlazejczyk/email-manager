@@ -1,10 +1,28 @@
+import { useState, useEffect } from "react";
 import './App.css';
-import { Main } from "./pages/Main";
+import { Main, Subscribers } from "./pages";
+import { getSubscribers, getCampaigns } from "./api";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
+  const [subscribers, setSubscribers] = useState([]);
+  const [campaigns, setCampaigns] = useState([]);
+
+  useEffect(() => {
+    // figure out how to set the values to subscribers and campaigns
+    getSubscribers();
+    getCampaigns();
+  }, [])
+
   return (
     <div className="App">
-      <Main />
+      <Router>
+        <Routes>
+          <Route path="/subscribers" element={<Subscribers />} />
+          <Route path="/" element={<Main />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

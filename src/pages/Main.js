@@ -3,10 +3,12 @@ import { Dialog } from "../components/Dialog";
 import { AddButton, MainButton } from "../components/Buttons";
 import { useState } from "react";
 
+import { Link } from "react-router-dom";
+
 import "./Main.scss";
 
 
-export function Main() {
+function Main() {
   const [addSubscriberFormOpen, setSubscriberFormOpen] = useState(false);
   const [addCampaignFormOpen, setCampaignFormOpen] = useState(false);
 
@@ -27,8 +29,8 @@ export function Main() {
     <div className="main">
       <h2 className="main__title">Email Sender</h2>
       <div className="main__buttons-container">
-        <MainButton label="Subscribers" />
-        <MainButton label="Campaigns" />
+        <Link to="/subscribers"><MainButton label="Subscribers" /></Link>
+        <Link to="/campaigns"><MainButton label="Campaigns" /></Link>
         <div className="main__buttons-container--add">
           <AddButton openDialog={handleSubscriberFormOpen} />
         </div>
@@ -45,3 +47,5 @@ export function Main() {
     </div>
   );
 }
+
+export default Main;

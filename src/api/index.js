@@ -1,25 +1,35 @@
 const SUBSCRIBERS_URL = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
 const CAMPAIGNS_URL = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Campaigns?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
 
-
-
 const add = (url, data) => {
-    const config = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ fields: data })
-    }
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ fields: data })
+  }
+  fetch(url, config);
+}
 
-    fetch(url, config);
+const get = (url) => {
+  fetch(url)
+    .then(response => response.json())
+    .then(data => console.log(data.records));
 }
 
 export const addSubscriber = (data) => {
-    return add(SUBSCRIBERS_URL, data);
+  return add(SUBSCRIBERS_URL, data);
 }
 
 export const addCampaign = (data) => {
-    return add(CAMPAIGNS_URL, data);
+  return add(CAMPAIGNS_URL, data);
 }
 
+export const getSubscribers = () => {
+  return get(SUBSCRIBERS_URL);
+}
+
+export const getCampaigns = () => {
+  return get(CAMPAIGNS_URL);
+}
