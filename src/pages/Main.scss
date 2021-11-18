@@ -1,0 +1,24 @@
+.main {
+    border: solid;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__title {
+        font-size: 4rem;
+    }
+
+    &__buttons-container {
+        border: solid;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 1rem;
+
+        &--add {
+            border: solid red
+        }
+    }
+}
