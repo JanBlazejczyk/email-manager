@@ -6,6 +6,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     box-shadow: 5px 5px 5px 5px #888888;
+    background-color: #888888;
+
+    &__header {
+        text-align: right;
+        margin: 15px 15px 0px 0px
+    }
 }
