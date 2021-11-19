@@ -12,10 +12,13 @@ const add = (url, data) => {
   fetch(url, config);
 }
 
+const _delete = (url) => {
+  const config = { method: 'DELETE', }
+  return fetch(url, config);
+}
+
 const get = (url) => {
-  fetch(url)
-    .then(response => response.json())
-    .then(data => console.log(data.records));
+  return fetch(url)
 }
 
 export const addSubscriber = (data) => {
@@ -24,6 +27,12 @@ export const addSubscriber = (data) => {
 
 export const addCampaign = (data) => {
   return add(CAMPAIGNS_URL, data);
+}
+
+export const deleteSubscriber = (id) => {
+  console.log("ID to delete:", id);
+  const url = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers/${id}?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
+  return _delete(url);
 }
 
 export const getSubscribers = () => {
