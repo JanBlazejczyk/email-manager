@@ -20,7 +20,7 @@ function AddCampaignForm({ closeDialog, subjectContent = null, emailContent = nu
       <textarea defaultValue={emailContent} className="form__input form__input--content" placeholder="E-mail content" {...register("Content", { required: true })} />
       {errors.Content && errors.Content.type === "required" && <span>Can't send a message without content</span>}
 
-      <input className="form__button" type="submit" value="Send" />
+      <input className="form__button" type="submit" value="Save" />
     </form>
 
   );

@@ -9,12 +9,24 @@ import "./Campaigns.scss";
 function Campaigns() {
   const [campaigns, setCampaigns] = useState([]);
   const [addCampaignFormOpen, setCampaignFormOpen] = useState(false);
+  const [defaultSubjectField, setDefaultSubjectField] = useState(null);
+  const [defaultContentField, setDefaultContentField] = useState(null);
 
-  const handleCampaignFormOpen = () => {
+  const handleCampaignFormOpen = (event) => {
+    getDefaultEditFormInput(event);
     setCampaignFormOpen(true);
   }
   const handleDialogClose = () => {
     setCampaignFormOpen(false);
+  }
+
+  const getDefaultEditFormInput = (event) => {
+    for (let campaign of campaigns) {
+      if (campaign.id === event.currentTarget.id) {
+        setDefaultSubjectField(campaign.fields.Subject);
+        setDefaultContentField(campaign.fields.Content);
+      }
+    }
   }
 
   const saveCampaignsInState = () => {
@@ -45,7 +57,7 @@ function Campaigns() {
           <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
           <div onClick={handleCampaignFormOpen} id={campaign.id}><EditButton /></div>
           <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
-            <AddCampaignForm subjectContent={campaign.fields.Subject} emailContent={campaign.fields.Content} closeDialog={handleDialogClose} />
+            <AddCampaignForm subjectContent={defaultSubjectField} emailContent={defaultContentField} closeDialog={handleDialogClose} />
           </Dialog>
         </div>
       ))
