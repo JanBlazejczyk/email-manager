@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import './App.css';
-import { Main, Subscribers } from "./pages";
+import { Main, Subscribers, Campaigns } from "./pages";
 import { getSubscribers, getCampaigns } from "./api";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -20,6 +20,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/subscribers" element={<Subscribers />} />
+          <Route path="/campaigns" element={<Campaigns />} />
           <Route path="/" element={<Main />} />
         </Routes>
       </Router>

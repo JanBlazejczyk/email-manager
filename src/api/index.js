@@ -35,6 +35,11 @@ export const deleteSubscriber = (id) => {
   return _delete(url);
 }
 
+export const deleteCampaign = (id) => {
+  const url = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Campaigns/${id}?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
+  return _delete(url);
+}
+
 export const getSubscribers = () => {
   return get(SUBSCRIBERS_URL);
 }
