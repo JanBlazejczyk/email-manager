@@ -36,23 +36,22 @@ function Campaigns() {
   }, []);
 
   return (
-    <div className="campaigns">
-      <div className="campaigns-list">
-        <h3>Campaigns</h3>
-        {campaigns.map(campaign => (
-          <div id={campaign.id} key={campaign.id}>
-            Subject: {campaign.fields.Subject}<br />
-            Content: {campaign.fields.Content}
-            <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
-            <div onClick={handleCampaignFormOpen} id={campaign.id}><EditButton /></div>
-          </div>
-        ))
-        }
-      </div>
-      <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
-        <AddCampaignForm closeDialog={handleDialogClose} />
-      </Dialog>
+    <div className="campaigns-list">
+      <h3>Campaigns</h3>
+      {campaigns.map(campaign => (
+        <div id={campaign.id} key={campaign.id}>
+          Subject: {campaign.fields.Subject}<br />
+          Content: {campaign.fields.Content}
+          <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
+          <div onClick={handleCampaignFormOpen} id={campaign.id}><EditButton /></div>
+          <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
+            <AddCampaignForm subjectContent={campaign.fields.Subject} emailContent={campaign.fields.Content} closeDialog={handleDialogClose} />
+          </Dialog>
+        </div>
+      ))
+      }
     </div>
+
   );
 }
 
