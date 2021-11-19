@@ -29,8 +29,8 @@ function Subscribers() {
     <div className="subscribers-list">
       <h3>Subscribers</h3>
       {subscribers.map(subscriber => (
-        <div id={subscriber.id} key={subscriber.id} onClick={handleDelete}>
-          {subscriber.fields["Name"]} {subscriber.fields["E-mail"]} <div id={subscriber.id}><DeleteButton deleteHandler={handleDelete} /></div>
+        <div id={subscriber.id} key={subscriber.id}>
+          {subscriber.fields["Name"]} {subscriber.fields["E-mail"]} <div onClick={handleDelete} id={subscriber.id}><DeleteButton deleteHandler={handleDelete} /></div>
         </div>
       ))}
     </div>
