@@ -1,12 +1,16 @@
-import { addCampaign } from "../../api";
+import { addCampaign, editCampaign } from "../../api";
 import "./Forms.scss";
 
 import { useForm } from "react-hook-form";
 
-function AddCampaignForm({ closeDialog, subjectContent = null, emailContent = null }) {
+function AddCampaignForm({ closeDialog, edit, subjectContent = null, emailContent = null, update = false, activeId = null }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = (data) => {
-    addCampaign(data);
+    if (update) {
+      edit(activeId, data);
+    } else {
+      addCampaign(data);
+    }
     closeDialog();
   };
 

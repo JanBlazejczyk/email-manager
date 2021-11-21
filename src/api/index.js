@@ -12,6 +12,17 @@ const add = (url, data) => {
   fetch(url, config);
 }
 
+const edit = (url, data) => {
+  const config = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ fields: data })
+  }
+  return fetch(url, config);
+}
+
 const _delete = (url) => {
   const config = { method: 'DELETE', }
   return fetch(url, config);
@@ -30,9 +41,13 @@ export const addCampaign = (data) => {
 }
 
 export const deleteSubscriber = (id) => {
-  console.log("ID to delete:", id);
   const url = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers/${id}?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
   return _delete(url);
+}
+
+export const editCampaign = (id, data) => {
+  const url = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Campaigns/${id}?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
+  return edit(url, data);
 }
 
 export const deleteCampaign = (id) => {

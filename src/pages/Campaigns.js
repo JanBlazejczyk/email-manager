@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { DeleteButton, EditButton } from "../components/Buttons";
 import { Dialog } from "../components/Dialog";
 import { AddCampaignForm } from "../components/Forms";
-import { deleteCampaign, getCampaigns } from "../api";
+import { deleteCampaign, getCampaigns, editCampaign } from "../api";
 
 import "./Campaigns.scss";
 
@@ -11,6 +11,7 @@ function Campaigns() {
   const [addCampaignFormOpen, setCampaignFormOpen] = useState(false);
   const [defaultSubjectField, setDefaultSubjectField] = useState(null);
   const [defaultContentField, setDefaultContentField] = useState(null);
+  const [idToEdit, setIdToEdit] = useState(null);
 
   const handleCampaignFormOpen = (event) => {
     getDefaultEditFormInput(event);
@@ -25,6 +26,7 @@ function Campaigns() {
       if (campaign.id === event.currentTarget.id) {
         setDefaultSubjectField(campaign.fields.Subject);
         setDefaultContentField(campaign.fields.Content);
+        setIdToEdit(event.currentTarget.id);
       }
     }
   }
@@ -34,6 +36,11 @@ function Campaigns() {
       .then(request => request.json())
       .then(data => { setCampaigns(data.records); console.log(data.records) })
       .catch(error => console.error(error));
+  }
+
+  const handleEdit = (id, data) => {
+    editCampaign(id, data)
+      .then(() => saveCampaignsInState());
   }
 
   const handleDelete = (event) => {
@@ -57,7 +64,7 @@ function Campaigns() {
           <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
           <div onClick={handleCampaignFormOpen} id={campaign.id}><EditButton /></div>
           <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
-            <AddCampaignForm subjectContent={defaultSubjectField} emailContent={defaultContentField} closeDialog={handleDialogClose} />
+            <AddCampaignForm activeId={idToEdit} update={true} subjectContent={defaultSubjectField} emailContent={defaultContentField} closeDialog={handleDialogClose} edit={handleEdit} />
           </Dialog>
         </div>
       ))
