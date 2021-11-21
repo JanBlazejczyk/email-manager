@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { DeleteButton, EditButton } from "../components/Buttons";
+import { DeleteButton, EditButton, SendButton } from "../components/Buttons";
 import { Dialog } from "../components/Dialog";
 import { CampaignForm } from "../components/Forms";
 import { deleteCampaign, getCampaigns, editCampaign } from "../api";
@@ -63,6 +63,7 @@ function Campaigns() {
           Content: {campaign.fields.Content}
           <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
           <div onClick={handleCampaignFormOpen} id={campaign.id}><EditButton /></div>
+          <div><SendButton /></div>
           <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
             <CampaignForm activeId={idToEdit} update={true} subjectContent={defaultSubjectField} emailContent={defaultContentField} closeDialog={handleDialogClose} edit={handleEdit} />
           </Dialog>
