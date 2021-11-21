@@ -1,3 +1,5 @@
+import { init } from 'emailjs-com';
+
 const SUBSCRIBERS_URL = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
 const CAMPAIGNS_URL = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Campaigns?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
 
@@ -61,4 +63,36 @@ export const getSubscribers = () => {
 
 export const getCampaigns = () => {
   return get(CAMPAIGNS_URL);
+}
+
+// mail
+const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+const userId = process.env.REACT_APP_EMAILJS_USER_ID;
+const token = process.env.REACT_APP_EMAILJS_TOKEN;
+const baseUrl = "https://api.emailjs.com/api/v1.0/email/send";
+
+export const sendEmails = (addresses, content, subject) => {
+  let data = {
+    service_id: serviceId,
+    template_id: templateId,
+    user_id: userId,
+    accessToken: token,
+    template_params: {
+      subject: subject,
+      content: content,
+      name: "name",
+      email: addresses,
+    }
+  };
+
+  let config = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }
+
+  return fetch(baseUrl, config);
 }
