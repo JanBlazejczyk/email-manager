@@ -1,9 +1,9 @@
-import { addCampaign, editCampaign } from "../../api";
+import { addCampaign } from "../../api";
 import "./Forms.scss";
 
 import { useForm } from "react-hook-form";
 
-function AddCampaignForm({ closeDialog, edit, subjectContent = null, emailContent = null, update = false, activeId = null }) {
+function CampaignForm({ closeDialog, edit, subjectContent = null, emailContent = null, update = false, activeId = null }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = (data) => {
     if (update) {
@@ -30,4 +30,4 @@ function AddCampaignForm({ closeDialog, edit, subjectContent = null, emailConten
   );
 }
 
-export default AddCampaignForm;
+export default CampaignForm;

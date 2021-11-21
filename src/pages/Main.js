@@ -1,4 +1,4 @@
-import { AddCampaignForm, AddSubscriberForm } from "../components/Forms";
+import { CampaignForm, AddSubscriberForm } from "../components/Forms";
 import { Dialog } from "../components/Dialog";
 import { AddButton, MainButton } from "../components/Buttons";
 import { useState } from "react";
@@ -38,7 +38,7 @@ function Main() {
           <AddButton openDialog={handleCampaignFormOpen} />
         </div>
         <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
-          <AddCampaignForm closeDialog={handleDialogClose} />
+          <CampaignForm closeDialog={handleDialogClose} />
         </Dialog>
         <Dialog active={addSubscriberFormOpen} closeDialog={handleDialogClose}>
           <AddSubscriberForm closeDialog={handleDialogClose} />
