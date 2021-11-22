@@ -54,6 +54,7 @@ function Campaigns() {
         content = campaign.fields.Content;
         console.log("TYPE CONTENT:", typeof content);
         console.log("CONTENT:", content);
+        console.log("Transform the content");
         subject = campaign.fields.Subject;
       }
     }

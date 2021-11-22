@@ -34,7 +34,7 @@ function CampaignForm({ closeDialog, edit, subjectContent = null, emailContent =
 
 CampaignForm.propTypes = {
   closeDialog: PropTypes.func.isRequired,
-  edit: PropTypes.func.isRequired,
+  edit: PropTypes.func,
   subjectContent: PropTypes.string,
   emailContent: PropTypes.string,
   update: PropTypes.bool,
