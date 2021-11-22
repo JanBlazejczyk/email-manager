@@ -72,7 +72,7 @@ const userId = process.env.REACT_APP_EMAILJS_USER_ID;
 const token = process.env.REACT_APP_EMAILJS_TOKEN;
 const baseUrl = "https://api.emailjs.com/api/v1.0/email/send";
 
-export const sendEmails = (addresses, content, subject) => {
+export const sendEmails = (address, content, subject, name) => {
   let data = {
     service_id: serviceId,
     template_id: templateId,
@@ -81,8 +81,8 @@ export const sendEmails = (addresses, content, subject) => {
     template_params: {
       subject: subject,
       content: content,
-      name: "name",
-      email: addresses,
+      name: name,
+      email: address,
     }
   };
 

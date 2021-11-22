@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { DeleteButton, EditButton, SendButton } from "../components/Buttons";
 import { Dialog } from "../components/Dialog";
 import { CampaignForm } from "../components/Forms";
-import { deleteCampaign, getCampaigns, editCampaign } from "../api";
+import { deleteCampaign, getCampaigns, getSubscribers, editCampaign, sendEmails } from "../api";
 
 import "./Campaigns.scss";
 
 function Campaigns() {
   const [campaigns, setCampaigns] = useState([]);
+  const [subscribers, setSubscribers] = useState([]);
   const [addCampaignFormOpen, setCampaignFormOpen] = useState(false);
   const [defaultSubjectField, setDefaultSubjectField] = useState(null);
   const [defaultContentField, setDefaultContentField] = useState(null);
@@ -34,8 +35,34 @@ function Campaigns() {
   const saveCampaignsInState = () => {
     getCampaigns()
       .then(request => request.json())
-      .then(data => { setCampaigns(data.records); console.log(data.records) })
+      .then(data => setCampaigns(data.records))
       .catch(error => console.error(error));
+  }
+
+  const saveSubscribersInState = () => {
+    getSubscribers()
+      .then(request => request.json())
+      .then(data => setSubscribers(data.records))
+      .catch(error => console.error(error));
+  }
+
+  const handleSending = (event) => {
+    let content = null;
+    let subject = null;
+    for (let campaign of campaigns) {
+      if (campaign.id === event.currentTarget.id) {
+        content = campaign.fields.Content;
+        console.log("TYPE CONTENT:", typeof content);
+        console.log("CONTENT:", content);
+        subject = campaign.fields.Subject;
+      }
+    }
+    subscribers.forEach((subscriber) => {
+      let address = subscriber.fields["E-mail"];
+      let name = subscriber.fields.Name;
+      sendEmails(address, content, subject, name); // address, content, subject, name
+    })
+
   }
 
   const handleEdit = (id, data) => {
@@ -44,14 +71,13 @@ function Campaigns() {
   }
 
   const handleDelete = (event) => {
-    // deletes the subscriber with the given id from the database
-    console.log("hitted id:", event.currentTarget.id)
     deleteCampaign(event.currentTarget.id)
       .then(() => saveCampaignsInState());
   }
 
   useEffect(() => {
     saveCampaignsInState();
+    saveSubscribersInState();
   }, []);
 
   return (
@@ -63,7 +89,7 @@ function Campaigns() {
           Content: {campaign.fields.Content}
           <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
           <div onClick={handleCampaignFormOpen} id={campaign.id}><EditButton /></div>
-          <div><SendButton /></div>
+          <div onClick={handleSending} id={campaign.id}><SendButton /></div>
           <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
             <CampaignForm activeId={idToEdit} update={true} subjectContent={defaultSubjectField} emailContent={defaultContentField} closeDialog={handleDialogClose} edit={handleEdit} />
           </Dialog>
