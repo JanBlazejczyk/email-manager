@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,6 +10,10 @@ function AddButton({ openDialog }) {
     return (
         <FontAwesomeIcon onClick={openDialog} className="button button--add" icon={faPlusCircle} size="lg" />
     );
+}
+
+AddButton.propTypes = {
+    openDialog: PropTypes.func.isRequired
 }
 
 export default AddButton;

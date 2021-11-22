@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { addCampaign } from "../../api";
 import "./Forms.scss";
 
@@ -28,6 +30,15 @@ function CampaignForm({ closeDialog, edit, subjectContent = null, emailContent =
     </form>
 
   );
+}
+
+CampaignForm.propTypes = {
+  closeDialog: PropTypes.func.isRequired,
+  edit: PropTypes.func.isRequired,
+  subjectContent: PropTypes.string,
+  emailContent: PropTypes.string,
+  update: PropTypes.bool,
+  activeId: PropTypes.string
 }
 
 export default CampaignForm;
