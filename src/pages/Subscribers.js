@@ -25,12 +25,16 @@ function Subscribers() {
     saveSubscribersInState();
   }, []);
 
+  // TODO solve the problem with the double keys
   return (
     <div className="subscribers-list">
       <h3>Subscribers</h3>
       {subscribers.map(subscriber => (
-        <div id={subscriber.id} key={subscriber.id}>
-          {subscriber.fields["Name"]} {subscriber.fields["E-mail"]} <div onClick={handleDelete} id={subscriber.id}><DeleteButton deleteHandler={handleDelete} /></div>
+        <div id={subscriber.fields["Name"]} key={subscriber.fields["Name"]}>
+          {subscriber.fields["Name"]}
+          {subscriber.fields["E-mail"]}
+          {subscriber.fields["Subject (from Campaigns)"] ? subscriber.fields["Subject (from Campaigns)"].map(campaign => (<p id={subscriber.fields["Subject (from Campaigns)"]} key={subscriber.fields["Subject (from Campaigns)"]}>{campaign}</p>)) : null}
+          <div onClick={handleDelete} id={subscriber.id}><DeleteButton deleteHandler={handleDelete} /></div>
         </div>
       ))}
     </div>

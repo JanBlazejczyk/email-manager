@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { DeleteButton, EditButton, SendButton } from "../components/Buttons";
 import { Dialog } from "../components/Dialog";
 import { CampaignForm } from "../components/Forms";
-import { deleteCampaign, getCampaigns, getSubscribers, editCampaign, sendEmails } from "../api";
+import { deleteCampaign, getCampaigns, getSubscribers, editCampaign, sendEmails, addCampaignToSubscriber } from "../api";
 
 import "./Campaigns.scss";
 
@@ -46,22 +46,24 @@ function Campaigns() {
       .catch(error => console.error(error));
   }
 
+  // mam tutaj campaign id, teraz trzeba napisać funkcję, która użyje go jako data
   const handleSending = (event) => {
     let content = null;
     let subject = null;
+    let campaignId = null;
     for (let campaign of campaigns) {
       if (campaign.id === event.currentTarget.id) {
         content = campaign.fields.Content;
-        console.log("TYPE CONTENT:", typeof content);
-        console.log("CONTENT:", content);
-        console.log("Transform the content");
         subject = campaign.fields.Subject;
+        // id of the campaign to be added to the array
+        campaignId = campaign.id
       }
     }
     subscribers.forEach((subscriber) => {
       let address = subscriber.fields["E-mail"];
       let name = subscriber.fields.Name;
       sendEmails(address, content, subject, name); // address, content, subject, name
+      addCampaignToSubscriber(subscriber.id, campaignId);
     })
 
   }

@@ -52,9 +52,43 @@ export const editCampaign = (id, data) => {
   return edit(url, data);
 }
 
+export const addCampaignToSubscriber = async (id, data) => {
+  const url = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers/${id}?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
+
+
+  // get the id of campaigns that the user already has and store it in a variable (array)
+  const alreadySavedCampaignsIds = await get(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data.fields["Campaigns"]) {
+        return data.fields["Campaigns"]
+      }
+    })
+
+  console.log("Previous IDs array:", alreadySavedCampaignsIds);
+
+  // push data to this array
+  alreadySavedCampaignsIds.push(data);
+  console.log("Array after pushing new id", alreadySavedCampaignsIds);
+
+  const config = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ fields: { Campaigns: alreadySavedCampaignsIds } })
+  }
+  return fetch(url, config);
+}
+
 export const deleteCampaign = (id) => {
   const url = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Campaigns/${id}?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
   return _delete(url);
+}
+
+export const getSubscriber = (id) => {
+  const url = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers/${id}?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
+  get(url);
 }
 
 export const getSubscribers = () => {
