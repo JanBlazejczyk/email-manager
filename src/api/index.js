@@ -52,16 +52,19 @@ export const editCampaign = (id, data) => {
   return edit(url, data);
 }
 
+// does not work if subscriber has no no previous campaigns
 export const addCampaignToSubscriber = async (id, data) => {
   const url = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers/${id}?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
 
-
   // get the id of campaigns that the user already has and store it in a variable (array)
-  const alreadySavedCampaignsIds = await get(url)
+  const alreadySavedCampaignsIds = await getSubscriber(id)
     .then(response => response.json())
     .then(data => {
       if (data.fields["Campaigns"]) {
         return data.fields["Campaigns"]
+      } else {
+        // if there are no campaigns assigned to the subscriber alreadySavedCampaignsIds is an empty array
+        return [];
       }
     })
 
@@ -88,7 +91,7 @@ export const deleteCampaign = (id) => {
 
 export const getSubscriber = (id) => {
   const url = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers/${id}?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
-  get(url);
+  return get(url);
 }
 
 export const getSubscribers = () => {
