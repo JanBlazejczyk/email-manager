@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getSubscribers, deleteSubscriber } from "../api";
+import { Link, useParams } from "react-router-dom";
 
 import { DeleteButton } from "../components/Buttons";
 
@@ -7,6 +8,7 @@ import "./Subscribers.scss";
 
 function Subscribers() {
   const [subscribers, setSubscribers] = useState([]);
+  let { subscriberId } = useParams();
 
   const saveSubscribersInState = () => {
     getSubscribers()
@@ -31,9 +33,15 @@ function Subscribers() {
       <h3>Subscribers</h3>
       {subscribers.map(subscriber => (
         <div id={subscriber.id} key={subscriber.id}>
-          {subscriber.fields["Name"]}
-          {subscriber.fields["E-mail"]}
-          {subscriber.fields["Subject (from Campaigns)"] ? subscriber.fields["Subject (from Campaigns)"].map((campaign, index) => (<p id={`camp-${index}`} key={`camp-${index}`}>{campaign}</p>)) : null}
+          <div>
+            Name: {subscriber.fields["Name"]}
+          </div>
+          <div>
+            Added: {subscriber.fields["Created at"]}
+          </div>
+          <div>
+            <Link to={`/subscribers/${subscriber.id}`}>Details</Link>
+          </div>
           <div onClick={handleDelete} id={subscriber.id}><DeleteButton deleteHandler={handleDelete} /></div>
         </div>
       ))}
