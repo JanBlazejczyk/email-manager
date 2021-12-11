@@ -11,6 +11,7 @@ function CampaignForm({ closeDialog, edit, subjectContent = null, emailContent =
     if (update) {
       edit(activeId, data);
     } else {
+      data["Status"] = "Draft";
       addCampaign(data);
     }
     closeDialog();

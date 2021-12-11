@@ -46,6 +46,11 @@ function Campaigns() {
       .catch(error => console.error(error));
   }
 
+  const changeCampaignStatus = (id) => {
+    let data = { Status: "Sent" }
+    editCampaign(id, data);
+  }
+
   const handleSending = (event) => {
     let content = null;
     let subject = null;
@@ -54,8 +59,8 @@ function Campaigns() {
       if (campaign.id === event.currentTarget.id) {
         content = campaign.fields.Content;
         subject = campaign.fields.Subject;
-        // id of the campaign to be added to the array
-        campaignId = campaign.id
+        campaignId = campaign.id;
+        changeCampaignStatus(campaignId);
       }
     }
     subscribers.forEach((subscriber) => {
