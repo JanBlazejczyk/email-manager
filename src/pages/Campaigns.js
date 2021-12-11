@@ -46,7 +46,6 @@ function Campaigns() {
       .catch(error => console.error(error));
   }
 
-  // mam tutaj campaign id, teraz trzeba napisać funkcję, która użyje go jako data
   const handleSending = (event) => {
     let content = null;
     let subject = null;
