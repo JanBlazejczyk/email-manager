@@ -68,11 +68,8 @@ export const addCampaignToSubscriber = async (id, data) => {
       }
     })
 
-  console.log("Previous IDs array:", alreadySavedCampaignsIds);
-
   // push data to this array
   alreadySavedCampaignsIds.push(data);
-  console.log("Array after pushing new id", alreadySavedCampaignsIds);
 
   const config = {
     method: 'PATCH',

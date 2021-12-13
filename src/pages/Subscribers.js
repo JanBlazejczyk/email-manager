@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getSubscribers, deleteSubscriber } from "../api";
 import { Link, useParams } from "react-router-dom";
+import Moment from 'react-moment';
 
 import { DeleteButton } from "../components/Buttons";
 
@@ -37,7 +38,11 @@ function Subscribers() {
             Name: {subscriber.fields["Name"]}
           </div>
           <div>
-            Added: {subscriber.fields["Created at"]}
+            Added:
+            <Moment format="DD.MM.YYYY hh:mm">
+              {subscriber.fields["Created at"]}
+            </Moment>
+
           </div>
           <div>
             <Link to={`/subscribers/${subscriber.id}`}>Details</Link>
