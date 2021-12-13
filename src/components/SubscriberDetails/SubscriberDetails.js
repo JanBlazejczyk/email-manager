@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
+import Moment from 'react-moment';
 
 import { getSubscriber } from "../../api";
 
@@ -30,7 +31,9 @@ function SubscriberDetails() {
           Address: {subscriber?.fields["E-mail"]}
         </div>
         <div className="subscriber__added">
-          Added: {subscriber?.fields["Created at"]}
+          Added: <Moment format="DD.MM.YYYY HH:mm">
+            {subscriber.fields["Created at"]}
+          </Moment>
         </div>
         <div className="subscriber__campaigns">
           Campaigns:

@@ -39,7 +39,7 @@ function Subscribers() {
           </div>
           <div>
             Added:
-            <Moment format="DD.MM.YYYY hh:mm">
+            <Moment format="DD.MM.YYYY HH:mm">
               {subscriber.fields["Created at"]}
             </Moment>
 
