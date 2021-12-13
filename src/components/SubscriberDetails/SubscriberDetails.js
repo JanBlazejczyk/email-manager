@@ -11,7 +11,7 @@ function SubscriberDetails() {
   const saveSubscriberInState = (id) => {
     getSubscriber(id)
       .then(request => request.json())
-      .then(data => setSubscriber(data))
+      .then(data => { setSubscriber(data); console.log(data) })
       .catch(error => console.error(error));
   }
 

@@ -13,7 +13,7 @@ function Subscribers() {
   const saveSubscribersInState = () => {
     getSubscribers()
       .then(request => request.json())
-      .then(data => { setSubscribers(data.records); console.log(data.records) })
+      .then(data => setSubscribers(data.records))
       .catch(error => console.error(error));
   }
 

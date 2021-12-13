@@ -89,8 +89,8 @@ function Campaigns() {
 
   return (
     <div className="campaigns-list">
-      <h3>Campaigns</h3>
-      {campaigns.map(campaign => (
+      <h3>Drafts</h3>
+      {campaigns.filter((campaign) => campaign.fields["Status"] === "Draft").map(campaign => (
         <div id={campaign.id} key={campaign.id}>
           Subject: {campaign.fields.Subject}<br />
           Content: {campaign.fields.Content}
@@ -103,8 +103,20 @@ function Campaigns() {
         </div>
       ))
       }
-    </div>
 
+      <h3>Send Campaigns</h3>
+      {campaigns.filter((campaign) => campaign.fields["Status"] === "Sent").map(campaign => (
+        <div id={campaign.id} key={campaign.id}>
+          Subject: {campaign.fields.Subject}<br />
+          Content: {campaign.fields.Content}
+          <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
+          <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
+            <CampaignForm activeId={idToEdit} update={true} subjectContent={defaultSubjectField} emailContent={defaultContentField} closeDialog={handleDialogClose} edit={handleEdit} />
+          </Dialog>
+        </div>
+      ))
+      }
+    </div>
   );
 }
 
