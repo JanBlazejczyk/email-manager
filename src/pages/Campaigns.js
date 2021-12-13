@@ -5,6 +5,7 @@ import { CampaignForm } from "../components/Forms";
 import { deleteCampaign, getCampaigns, getSubscribers, editCampaign, sendEmails, addCampaignToSubscriber } from "../api";
 
 import "./Campaigns.scss";
+import Moment from "react-moment";
 
 function Campaigns() {
   const [campaigns, setCampaigns] = useState([]);
@@ -51,6 +52,12 @@ function Campaigns() {
     editCampaign(id, data);
   }
 
+  const addCampaignSendDate = (id) => {
+    let data = { Send: Date.now().toString() };
+    console.log(data);
+    editCampaign(id, data);
+  }
+
   const handleSending = (event) => {
     let content = null;
     let subject = null;
@@ -61,6 +68,7 @@ function Campaigns() {
         subject = campaign.fields.Subject;
         campaignId = campaign.id;
         changeCampaignStatus(campaignId);
+        addCampaignSendDate(campaignId);
       }
     }
     subscribers.forEach((subscriber) => {
@@ -109,6 +117,7 @@ function Campaigns() {
         <div id={campaign.id} key={campaign.id}>
           Subject: {campaign.fields.Subject}<br />
           Content: {campaign.fields.Content}
+          Sent: <Moment format="DD.MM.YYYY HH:mm">{Number(campaign.fields.Send)}</Moment>
           <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
           <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
             <CampaignForm activeId={idToEdit} update={true} subjectContent={defaultSubjectField} emailContent={defaultContentField} closeDialog={handleDialogClose} edit={handleEdit} />
