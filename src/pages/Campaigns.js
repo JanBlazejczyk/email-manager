@@ -13,6 +13,7 @@ function Campaigns() {
   const [addCampaignFormOpen, setCampaignFormOpen] = useState(false);
   const [defaultSubjectField, setDefaultSubjectField] = useState(null);
   const [defaultContentField, setDefaultContentField] = useState(null);
+  const [defaultGreetingField, setDefaultGreetingField] = useState(null);
   const [idToEdit, setIdToEdit] = useState(null);
 
   const handleCampaignFormOpen = (event) => {
@@ -28,6 +29,7 @@ function Campaigns() {
       if (campaign.id === event.currentTarget.id) {
         setDefaultSubjectField(campaign.fields.Subject);
         setDefaultContentField(campaign.fields.Content);
+        setDefaultGreetingField(campaign.fields.Greeting);
         setIdToEdit(event.currentTarget.id);
       }
     }
@@ -54,18 +56,19 @@ function Campaigns() {
 
   const addCampaignSendDate = (id) => {
     let data = { Send: Date.now().toString() };
-    console.log(data);
     editCampaign(id, data);
   }
 
   const handleSending = (event) => {
     let content = null;
     let subject = null;
+    let greeting = null;
     let campaignId = null;
     for (let campaign of campaigns) {
       if (campaign.id === event.currentTarget.id) {
         content = campaign.fields.Content;
         subject = campaign.fields.Subject;
+        greeting = campaign.fields.Greeting;
         campaignId = campaign.id;
         changeCampaignStatus(campaignId);
         addCampaignSendDate(campaignId);
@@ -74,7 +77,7 @@ function Campaigns() {
     subscribers.forEach((subscriber) => {
       let address = subscriber.fields["E-mail"];
       let name = subscriber.fields.Name;
-      sendEmails(address, content, subject, name); // address, content, subject, name
+      sendEmails(address, content, subject, name, greeting); // address, content, subject, name
       addCampaignToSubscriber(subscriber.id, campaignId);
     })
 
@@ -106,7 +109,7 @@ function Campaigns() {
           <div onClick={handleCampaignFormOpen} id={campaign.id}><EditButton /></div>
           <div onClick={handleSending} id={campaign.id}><SendButton /></div>
           <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
-            <CampaignForm activeId={idToEdit} update={true} subjectContent={defaultSubjectField} emailContent={defaultContentField} closeDialog={handleDialogClose} edit={handleEdit} />
+            <CampaignForm activeId={idToEdit} update={true} subjectContent={defaultSubjectField} emailContent={defaultContentField} greetingContent={defaultGreetingField} closeDialog={handleDialogClose} edit={handleEdit} />
           </Dialog>
         </div>
       ))
