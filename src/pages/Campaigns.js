@@ -77,10 +77,10 @@ function Campaigns() {
     subscribers.forEach((subscriber) => {
       let address = subscriber.fields["E-mail"];
       let name = subscriber.fields.Name;
-      sendEmails(address, content, subject, name, greeting); // address, content, subject, name
+      sendEmails(address, content, subject, name, greeting);
       addCampaignToSubscriber(subscriber.id, campaignId);
     })
-
+    saveCampaignsInState();
   }
 
   const handleEdit = (id, data) => {
@@ -102,7 +102,7 @@ function Campaigns() {
     <div className="campaigns-list">
       <h3>Drafts</h3>
       {campaigns.filter((campaign) => campaign.fields["Status"] === "Draft").map(campaign => (
-        <div id={campaign.id} key={campaign.id}>
+        <div id={campaign.id} key={`${campaign.fields.Send}-${campaign.id}`}>
           Subject: {campaign.fields.Subject}<br />
           Content: {campaign.fields.Content}
           <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
@@ -117,7 +117,7 @@ function Campaigns() {
 
       <h3>Send Campaigns</h3>
       {campaigns.filter((campaign) => campaign.fields["Status"] === "Sent").map(campaign => (
-        <div id={campaign.id} key={campaign.id}>
+        <div id={campaign.id} key={`${campaign.fields.Send}-${campaign.id}`}>
           Subject: {campaign.fields.Subject}<br />
           Content: {campaign.fields.Content}
           Sent: <Moment format="DD.MM.YYYY HH:mm">{Number(campaign.fields.Send)}</Moment>

@@ -1,5 +1,3 @@
-import { init } from 'emailjs-com';
-
 const SUBSCRIBERS_URL = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
 const CAMPAIGNS_URL = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Campaigns?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
 

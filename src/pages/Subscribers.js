@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getSubscribers, deleteSubscriber } from "../api";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Moment from 'react-moment';
 
 import { DeleteButton } from "../components/Buttons";
@@ -9,7 +9,6 @@ import "./Subscribers.scss";
 
 function Subscribers() {
   const [subscribers, setSubscribers] = useState([]);
-  let { subscriberId } = useParams();
 
   const saveSubscribersInState = () => {
     getSubscribers()
