@@ -15,6 +15,7 @@ function Campaigns() {
   const [defaultContentField, setDefaultContentField] = useState(null);
   const [defaultGreetingField, setDefaultGreetingField] = useState(null);
   const [idToEdit, setIdToEdit] = useState(null);
+  const [keyValue, setKeyValue] = useState(false);
 
   const handleCampaignFormOpen = (event) => {
     getDefaultEditFormInput(event);
@@ -80,6 +81,7 @@ function Campaigns() {
       sendEmails(address, content, subject, name, greeting);
       addCampaignToSubscriber(subscriber.id, campaignId);
     })
+    setKeyValue(!keyValue);
   }
 
   const handleEdit = (id, data) => {
@@ -94,18 +96,14 @@ function Campaigns() {
 
   useEffect(() => {
     saveCampaignsInState();
-  }, [campaigns]);
-
-  useEffect(() => {
-    saveCampaignsInState();
     saveSubscribersInState();
-  }, []);
+  }, [keyValue]);
 
   return (
     <div className="campaigns-list">
       <h3>Drafts</h3>
       {campaigns.filter((campaign) => campaign.fields["Status"] === "Draft").map(campaign => (
-        <div id={campaign.id} key={campaign.id}>
+        <div id={campaign.id} key={`${keyValue}-${campaign.id}`}>
           Subject: {campaign.fields.Subject}<br />
           Content: {campaign.fields.Content}
           <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
@@ -120,7 +118,7 @@ function Campaigns() {
 
       <h3>Send Campaigns</h3>
       {campaigns.filter((campaign) => campaign.fields["Status"] === "Sent").map(campaign => (
-        <div id={campaign.id} key={campaign.id}>
+        <div id={campaign.id} key={`${keyValue}-${campaign.id}`}>
           Subject: {campaign.fields.Subject}<br />
           Content: {campaign.fields.Content}
           Sent: <Moment format="DD.MM.YYYY HH:mm">{Number(campaign.fields.Send)}</Moment>

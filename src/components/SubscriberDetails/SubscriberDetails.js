@@ -12,14 +12,13 @@ function SubscriberDetails() {
   const saveSubscriberInState = (id) => {
     getSubscriber(id)
       .then(request => request.json())
-      .then(data => { setSubscriber(data); console.log(data) })
+      .then(data => setSubscriber(data))
       .catch(error => console.error(error));
   }
 
   useEffect(() => {
-    console.log(subscriberId)
     saveSubscriberInState(subscriberId);
-  }, [])
+  }, [subscriberId])
 
   if (subscriber) {
     return (
