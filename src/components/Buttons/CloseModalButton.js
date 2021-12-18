@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import "./Buttons.scss";
 function CloseModalButton({ closeDialog }) {
     return (
-        <FontAwesomeIcon onClick={closeDialog} className="button button--close-modal" icon={faTimesCircle} size="lg" />
+        <FontAwesomeIcon onClick={closeDialog} className="button button--close-modal" icon={faTimes} size="lg" />
     );
 }
 

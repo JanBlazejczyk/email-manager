@@ -31,6 +31,8 @@ function Campaigns() {
         setDefaultSubjectField(campaign.fields.Subject);
         setDefaultContentField(campaign.fields.Content);
         setDefaultGreetingField(campaign.fields.Greeting);
+        console.log(defaultGreetingField);
+        console.log(campaign.fields.Greeting);
         setIdToEdit(event.currentTarget.id);
       }
     }
@@ -123,9 +125,6 @@ function Campaigns() {
           Content: {campaign.fields.Content}
           Sent: <Moment format="DD.MM.YYYY HH:mm">{Number(campaign.fields.Send)}</Moment>
           <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
-          <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
-            <CampaignForm activeId={idToEdit} update={true} subjectContent={defaultSubjectField} emailContent={defaultContentField} closeDialog={handleDialogClose} edit={handleEdit} />
-          </Dialog>
         </div>
       ))
       }
