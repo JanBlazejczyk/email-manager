@@ -31,8 +31,6 @@ function Campaigns() {
         setDefaultSubjectField(campaign.fields.Subject);
         setDefaultContentField(campaign.fields.Content);
         setDefaultGreetingField(campaign.fields.Greeting);
-        console.log(defaultGreetingField);
-        console.log(campaign.fields.Greeting);
         setIdToEdit(event.currentTarget.id);
       }
     }

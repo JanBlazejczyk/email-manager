@@ -50,7 +50,6 @@ export const editCampaign = (id, data) => {
   return edit(url, data);
 }
 
-// does not work if subscriber has no no previous campaigns
 export const addCampaignToSubscriber = async (id, data) => {
   const url = `https://api.airtable.com/v0/appEI6OkMBbhnzeas/Subscribers/${id}?api_key=${process.env.REACT_APP_AIRTABLE_API_KEY}`;
 
