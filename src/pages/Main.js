@@ -27,14 +27,14 @@ function Main() {
 
   return (
     <div className="main">
-      <h2 className="main__title">Email Sender</h2>
+      <h2 className="main__title">E-mail Manager</h2>
       <div className="main__buttons-container">
-        <Link to="/subscribers"><MainButton label="Subscribers" /></Link>
-        <Link to="/campaigns"><MainButton label="Campaigns" /></Link>
-        <div className="main__buttons-container--add">
+        <div className="main__buttons-container--category">
+          <Link to="/subscribers"><MainButton label="Subscribers" /></Link>
           <AddButton openDialog={handleSubscriberFormOpen} />
         </div>
-        <div className="main__buttons-container--add">
+        <div className="main__buttons-container--category">
+          <Link to="/campaigns"><MainButton label="Campaigns" /></Link>
           <AddButton openDialog={handleCampaignFormOpen} />
         </div>
         <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>

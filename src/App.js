@@ -8,9 +8,6 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <nav>
-          <Link to="/">Home</Link>
-        </nav>
         <Routes>
           <Route path="/subscribers" element={<Subscribers />} />
           <Route path="/subscribers/:subscriberId" element={<SubscriberDetails />} />
