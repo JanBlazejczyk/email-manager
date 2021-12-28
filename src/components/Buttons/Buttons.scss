@@ -12,6 +12,10 @@
       font-weight: 600;
     }
 
+    &--main:hover {
+      @extend %button-hover;
+    }
+
     &--add {
       background-color: $blue;
       color: $light-grey;
@@ -21,6 +25,10 @@
       padding: 0;
       font-size: 1.5em;
       font-weight: 600;
+    }
+
+    &--add:hover {
+      @extend %button-hover;
     }
 
     &--close-modal {
