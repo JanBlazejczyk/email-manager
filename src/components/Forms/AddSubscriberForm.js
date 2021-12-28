@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { useForm } from "react-hook-form";
 import { addSubscriber } from "../../api";
 
-import "./Forms.scss"
+import "./Forms.scss";
+import "../Buttons/Buttons.scss";
 
 function AddSubscriberForm({ closeDialog }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -23,7 +24,7 @@ function AddSubscriberForm({ closeDialog }) {
       {errors.Email && errors.Email.type === "required" && <span>Email is required</span>}
       {errors.Email && errors.Email.type === "pattern" && <span>Please enter a valid email address</span>}
 
-      <input className="form__button" type="submit" value="Add  subscriber" />
+      <input className="button button__form" type="submit" value="Save" />
     </form >
   );
 }

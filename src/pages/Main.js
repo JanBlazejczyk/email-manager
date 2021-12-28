@@ -37,10 +37,10 @@ function Main() {
           <Link to="/campaigns"><MainButton label="Campaigns" /></Link>
           <AddButton openDialog={handleCampaignFormOpen} />
         </div>
-        <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
+        <Dialog title="Add New Campaign" active={addCampaignFormOpen} closeDialog={handleDialogClose}>
           <CampaignForm closeDialog={handleDialogClose} />
         </Dialog>
-        <Dialog active={addSubscriberFormOpen} closeDialog={handleDialogClose}>
+        <Dialog title="Add Subscriber" active={addSubscriberFormOpen} closeDialog={handleDialogClose}>
           <AddSubscriberForm closeDialog={handleDialogClose} />
         </Dialog>
       </div>

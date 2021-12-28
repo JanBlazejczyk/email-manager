@@ -16,6 +16,22 @@
       @extend %button-hover;
     }
 
+    &__form {
+      background-color: $blue;
+      border: none;
+      width: 8rem;
+      padding: 0.7rem;
+      border-radius: 0.3rem;
+      color: $light-grey;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    &__form:hover {
+      @extend %button-hover;
+    }
+
     &--add {
       background-color: $blue;
       color: $light-grey;
@@ -33,6 +49,13 @@
 
     &--close-modal {
       color: $blue;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+
+    &--close-modal:hover {
+      opacity: 0.5;
     }
 
     &--delete {

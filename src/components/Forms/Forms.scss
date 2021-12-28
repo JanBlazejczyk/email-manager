@@ -1,22 +1,41 @@
+@import "../../utils.scss";
+
 .form {
     box-sizing: border-box;
-
     margin: 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 320px;
-    // border: solid red 5px;
 
     &__input {
-      padding: 5px;
+      padding: 0.6rem;
       margin: 5px;
+      border-radius: 0.3rem;
+      border: none;
+      background-color: $light-grey;
+      color: $dark-grey;
+      font-size: 0.9rem;
+      width: 90%;
 
       &--subject {
 
       }
 
+      &--greeting {
+
+      }
+
       &--content {
         height: 300px;
+      }
+
+      &--name {
+
+      }
+
+      &--email {
+
       }
     }
 

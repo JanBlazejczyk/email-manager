@@ -2,7 +2,7 @@ import './App.css';
 import { Main, Subscribers, Campaigns } from "./pages";
 import { SubscriberDetails } from "./components/SubscriberDetails"
 
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (

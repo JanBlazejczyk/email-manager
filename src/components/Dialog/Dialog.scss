@@ -1,16 +1,31 @@
+@import "../../utils.scss";
+
 .dialog {
-    border: solid;
-    border-radius: 10px;
-    width: 350px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.2rem;
+    width: 23rem;
     position: absolute; /* or fixed */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 5px 5px 5px 5px #888888;
-    background-color: #888888;
+    background-color: $dialog-background-grey;
 
     &__header {
-        text-align: right;
-        margin: 15px 15px 0px 0px
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1.5rem;
+    }
+
+    &__title {
+        color: $light-grey;
+    }
+
+    &__close {
+        margin: 1rem;
     }
 }
