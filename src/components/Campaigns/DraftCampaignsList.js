@@ -2,13 +2,13 @@ import { DeleteButton, SendButton, EditButton } from "../Buttons";
 import { Dialog } from "../Dialog";
 import { CampaignForm } from "../Forms";
 
+function DraftCampaignsList({ campaigns, handleDelete, handleEdit, handleSending, handleDialogClose, handleCampaignFormOpen, addCampaignFormOpen, idToEdit, defaultSubjectField, defaultContentField, defaultGreetingField }) {
 
-function SentCampaignsList({ campaigns, keyValue, handleDelete, handleEdit, handleSending, handleDialogClose, handleCampaignFormOpen, addCampaignFormOpen, idToEdit, defaultSubjectField, defaultContentField, defaultGreetingField }) {
   return (
     <div className="campaigns__list">
       {campaigns.filter((campaign) => campaign.fields["Status"] === "Draft").length === 0 ? <p>No drafts</p> :
         campaigns.filter((campaign) => campaign.fields["Status"] === "Draft").map(campaign => (
-          <div id={campaign.id} key={`${keyValue}-${campaign.id}`}>
+          <div id={campaign.id} key={campaign.id}>
             Subject: {campaign.fields.Subject}<br />
             Content: {campaign.fields.Content}
             <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
@@ -24,4 +24,4 @@ function SentCampaignsList({ campaigns, keyValue, handleDelete, handleEdit, hand
   );
 }
 
-export default SentCampaignsList;
+export default DraftCampaignsList;

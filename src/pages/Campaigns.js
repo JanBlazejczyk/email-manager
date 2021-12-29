@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CampaignsHeader, SentCampaignsList, DraftCampaignsList } from "../components/Campaigns";
-import { deleteCampaign, getCampaigns, getSubscribers, editCampaign, sendEmails, addCampaignToSubscriber } from "../api";
+import { deleteCampaign, getCampaigns, getSubscribers, editCampaign, sendEmails, addCampaignToSubscriber, changeCampaignStatus, addCampaignSendDate } from "../api";
 
 import "../components/Buttons/Buttons.scss";
 import "./Campaigns.scss";
@@ -13,7 +13,6 @@ function Campaigns() {
   const [defaultContentField, setDefaultContentField] = useState(null);
   const [defaultGreetingField, setDefaultGreetingField] = useState(null);
   const [idToEdit, setIdToEdit] = useState(null);
-  const [keyValue, setKeyValue] = useState(false);
   const [display, setDisplay] = useState("drafts");
 
   const displaySent = () => {
@@ -28,6 +27,7 @@ function Campaigns() {
     getDefaultEditFormInput(event);
     setCampaignFormOpen(true);
   }
+
   const handleDialogClose = () => {
     setCampaignFormOpen(false);
   }
@@ -57,29 +57,20 @@ function Campaigns() {
       .catch(error => console.error(error));
   }
 
-  const changeCampaignStatus = (id) => {
-    let data = { Status: "Sent" }
-    editCampaign(id, data);
-  }
-
-  const addCampaignSendDate = (id) => {
-    let data = { Send: Date.now().toString() };
-    editCampaign(id, data);
-  }
-
-  const handleSending = (event) => {
+  const handleSending = async (event) => {
     let content = null;
     let subject = null;
     let greeting = null;
     let campaignId = null;
     for (let campaign of campaigns) {
-      if (campaign.id === event.currentTarget.id) {
+      if (event.currentTarget && campaign.id === event.currentTarget.id) {
         content = campaign.fields.Content;
         subject = campaign.fields.Subject;
         greeting = campaign.fields.Greeting;
         campaignId = campaign.id;
-        changeCampaignStatus(campaignId);
-        addCampaignSendDate(campaignId);
+        await changeCampaignStatus(campaignId)
+        await addCampaignSendDate(campaignId)
+        saveCampaignsInState();
       }
     }
     subscribers.forEach((subscriber) => {
@@ -88,7 +79,6 @@ function Campaigns() {
       sendEmails(address, content, subject, name, greeting);
       addCampaignToSubscriber(subscriber.id, campaignId);
     })
-    setKeyValue(!keyValue);
   }
 
   const handleEdit = (id, data) => {
@@ -104,16 +94,15 @@ function Campaigns() {
   useEffect(() => {
     saveCampaignsInState();
     saveSubscribersInState();
-  }, [keyValue]);
+  }, []);
 
   return (
-    <div className="campaigns__container" key={keyValue}>
+    <div className="campaigns__container">
       <CampaignsHeader handleDraftDisplay={displayDrafts} handleSentDisplay={displaySent} displayed={display} />
 
       {display === "drafts" ?
         <DraftCampaignsList
           campaigns={campaigns}
-          keyValue={keyValue}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
           handleSending={handleSending}
@@ -125,7 +114,7 @@ function Campaigns() {
           defaultContentField={defaultContentField}
           defaultGreetingField={defaultGreetingField}
         /> :
-        <SentCampaignsList campaigns={campaigns} keyValue={keyValue} handleDelete={handleDelete} />
+        <SentCampaignsList campaigns={campaigns} handleDelete={handleDelete} />
       }
     </div>
   );

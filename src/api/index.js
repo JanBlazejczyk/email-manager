@@ -96,6 +96,16 @@ export const getCampaigns = () => {
   return get(CAMPAIGNS_URL);
 }
 
+export const changeCampaignStatus = (id) => {
+  let data = { Status: "Sent" }
+  return editCampaign(id, data);
+}
+
+export const addCampaignSendDate = (id) => {
+  let data = { Send: Date.now().toString() };
+  return editCampaign(id, data);
+}
+
 // mail
 const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
 const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
