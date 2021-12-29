@@ -107,7 +107,7 @@ function Campaigns() {
   }, [keyValue]);
 
   return (
-    <div className="campaigns__container">
+    <div className="campaigns__container" key={keyValue}>
       <CampaignsHeader handleDraftDisplay={displayDrafts} handleSentDisplay={displaySent} displayed={display} />
 
       {display === "drafts" ?
