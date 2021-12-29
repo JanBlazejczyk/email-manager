@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { Main, Subscribers, Campaigns } from "./pages";
 import { SubscriberDetails } from "./components/SubscriberDetails"
 

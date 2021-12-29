@@ -10,10 +10,7 @@
     background-color: $light-grey;
 
     &__title {
-        font-size: 4rem;
-        font-family: 'Montserrat', sans-serif;
-        letter-spacing: 1rem;
-        color: $dark-grey;
+        @extend %heading
     }
 
     &__buttons-container {

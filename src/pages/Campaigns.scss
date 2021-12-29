@@ -1,0 +1,13 @@
+@import "../utils.scss";
+
+.campaigns {
+    &__container {
+        background-color: $light-grey;
+    }
+
+
+
+    &__title {
+        @extend %heading
+    }
+}

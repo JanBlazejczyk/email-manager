@@ -10,6 +10,10 @@
       width: 10rem;
       height: 3.5rem;
       font-weight: 600;
+
+      &-not-active {
+        background-color: $middle-grey;
+      }
     }
 
     &--main:hover {

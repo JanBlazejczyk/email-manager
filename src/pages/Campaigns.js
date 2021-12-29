@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { DeleteButton, EditButton, SendButton } from "../components/Buttons";
+import { DeleteButton, EditButton, SendButton, MainButton } from "../components/Buttons";
 import { Dialog } from "../components/Dialog";
 import { CampaignForm } from "../components/Forms";
 import { deleteCampaign, getCampaigns, getSubscribers, editCampaign, sendEmails, addCampaignToSubscriber } from "../api";
 
+import "../components/Buttons/Buttons.scss";
 import "./Campaigns.scss";
 import Moment from "react-moment";
 
@@ -16,6 +17,15 @@ function Campaigns() {
   const [defaultGreetingField, setDefaultGreetingField] = useState(null);
   const [idToEdit, setIdToEdit] = useState(null);
   const [keyValue, setKeyValue] = useState(false);
+  const [display, setDisplay] = useState("drafts");
+
+  const displaySent = () => {
+    setDisplay("sent");
+  }
+
+  const displayDrafts = () => {
+    setDisplay("drafts");
+  }
 
   const handleCampaignFormOpen = (event) => {
     getDefaultEditFormInput(event);
@@ -99,35 +109,54 @@ function Campaigns() {
     saveSubscribersInState();
   }, [keyValue]);
 
-  return (
-    <div className="campaigns-list">
-      <h3>Drafts</h3>
-      {campaigns.filter((campaign) => campaign.fields["Status"] === "Draft").map(campaign => (
-        <div id={campaign.id} key={`${keyValue}-${campaign.id}`}>
-          Subject: {campaign.fields.Subject}<br />
-          Content: {campaign.fields.Content}
-          <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
-          <div onClick={handleCampaignFormOpen} id={campaign.id}><EditButton /></div>
-          <div onClick={handleSending} id={campaign.id}><SendButton /></div>
-          <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
-            <CampaignForm activeId={idToEdit} update={true} subjectContent={defaultSubjectField} emailContent={defaultContentField} greetingContent={defaultGreetingField} closeDialog={handleDialogClose} edit={handleEdit} />
-          </Dialog>
+  if (display === "drafts") {
+    return (
+      <div className="campaigns__container">
+        <div className="campaigns__header">
+          <h3 className="campaigns__title">Campaigns</h3>
+          <MainButton handleClick={displayDrafts} label="Drafts" />
+          <MainButton handleClick={displaySent} label="Sent" notActive />
         </div>
-      ))
-      }
+        <div className="campaigns__list">
+          {campaigns.filter((campaign) => campaign.fields["Status"] === "Draft").map(campaign => (
+            <div id={campaign.id} key={`${keyValue}-${campaign.id}`}>
+              Subject: {campaign.fields.Subject}<br />
+              Content: {campaign.fields.Content}
+              <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
+              <div onClick={handleCampaignFormOpen} id={campaign.id}><EditButton /></div>
+              <div onClick={handleSending} id={campaign.id}><SendButton /></div>
+              <Dialog active={addCampaignFormOpen} closeDialog={handleDialogClose}>
+                <CampaignForm activeId={idToEdit} update={true} subjectContent={defaultSubjectField} emailContent={defaultContentField} greetingContent={defaultGreetingField} closeDialog={handleDialogClose} edit={handleEdit} />
+              </Dialog>
+            </div>
+          ))
+          }
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="campaigns__container">
+        <div className="campaigns__header">
+          <h3 className="campaigns__title">Campaigns</h3>
+          <MainButton handleClick={displayDrafts} label="Drafts" notActive />
+          <MainButton handleClick={displaySent} label="Sent" />
+        </div>
+        <div className="campaigns__list">
+          {campaigns.filter((campaign) => campaign.fields["Status"] === "Sent").map(campaign => (
+            <div id={campaign.id} key={`${keyValue}-${campaign.id}`}>
+              Subject: {campaign.fields.Subject}<br />
+              Content: {campaign.fields.Content}
+              Sent: <Moment format="DD.MM.YYYY HH:mm">{Number(campaign.fields.Send)}</Moment>
+              <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
+            </div>
+          ))
+          }
+        </div>
+      </div>
+    );
 
-      <h3>Send Campaigns</h3>
-      {campaigns.filter((campaign) => campaign.fields["Status"] === "Sent").map(campaign => (
-        <div id={campaign.id} key={`${keyValue}-${campaign.id}`}>
-          Subject: {campaign.fields.Subject}<br />
-          Content: {campaign.fields.Content}
-          Sent: <Moment format="DD.MM.YYYY HH:mm">{Number(campaign.fields.Send)}</Moment>
-          <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>
-        </div>
-      ))
-      }
-    </div>
-  );
+  }
 }
 
 export default Campaigns;
