@@ -5,7 +5,9 @@ import "./Buttons.scss";
 
 function DeleteButton() {
     return (
-        <FontAwesomeIcon className="button button--delete" icon={faTrashAlt} size="lg" />
+        <div className="button__wrapper">
+            <FontAwesomeIcon className="button button--delete" icon={faTrashAlt} size="lg" />
+        </div>
     );
 }
 

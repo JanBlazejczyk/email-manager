@@ -7,7 +7,7 @@ function SentCampaignsList({ campaigns, keyValue, handleDelete }) {
     <div className="campaigns__list">
       {campaigns.filter((campaign) => campaign.fields["Status"] === "Sent").length === 0 ? <p>No sent campaigns</p> :
         campaigns.filter((campaign) => campaign.fields["Status"] === "Sent").map(campaign => (
-          <div id={campaign.id} key={`${keyValue}-${campaign.id}`}>
+          <div className="campaigns__list--campaign" id={campaign.id} key={`${keyValue}-${campaign.id}`}>
             Subject: {campaign.fields.Subject}<br />
             Content: {campaign.fields.Content}
             Sent: <Moment format="DD.MM.YYYY HH:mm">{Number(campaign.fields.Send)}</Moment>

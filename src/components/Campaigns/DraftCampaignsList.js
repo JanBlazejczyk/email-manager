@@ -8,7 +8,7 @@ function DraftCampaignsList({ campaigns, handleDelete, handleEdit, handleSending
     <div className="campaigns__list">
       {campaigns.filter((campaign) => campaign.fields["Status"] === "Draft").length === 0 ? <p>No drafts</p> :
         campaigns.filter((campaign) => campaign.fields["Status"] === "Draft").map(campaign => (
-          <div id={campaign.id} key={campaign.id}>
+          <div className="campaigns__list--campaign" id={campaign.id} key={campaign.id}>
             Subject: {campaign.fields.Subject}<br />
             Content: {campaign.fields.Content}
             <div onClick={handleDelete} id={campaign.id}><DeleteButton /></div>

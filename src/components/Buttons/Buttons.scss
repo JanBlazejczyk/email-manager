@@ -2,6 +2,12 @@
 
 .button {
   cursor: pointer;
+
+  &__wrapper {
+    
+  }
+
+
     &--main {
       background-color: $dark-grey;
       color: $light-grey;
